@@ -1,0 +1,20 @@
+{
+  "name": "hardhat-fund-me",
+  "version": "1.0.0",
+  "description": "a fund-me program with hardhat.js",
+  "main": "index.js",
+  "scripts": {
+    "compile": "npx hardhat clear && npx hardhat compile"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@chainlink/contracts": "^1.4.0",
+    "@nomicfoundation/hardhat-toolbox": "^6.1.0",
+    "@nomiclabs/hardhat-etherscan": "^3.1.8",
+    "dotenv": "^17.2.2",
+    "hardhat": "^2.26.1",
+    "hardhat-deploy": "^1.0.4"
+  }
+}

@@ -7,7 +7,8 @@
     "compile": "npx hardhat clean && npx hardhat compile",
     "deploy": "npx hardhat deploy",
     "deploy-mock": "npx hardhat deploy --tags mock",
-    "deploy-FundMe": "npx hardhat deploy --tags FundMe"
+    "deploy-FundMe": "npx hardhat deploy --tags FundMe",
+    "deploy-sepolia": "npx hardhat deploy --network sepolia"
   },
   "keywords": [],
   "author": "",

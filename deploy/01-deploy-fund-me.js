@@ -5,7 +5,7 @@ const {verify} = require("../utils/verify.js");
 module.exports = async ({getNamedAccounts, deployments}) => {
     const {deploy, log} = deployments;
     const {deployer} = await getNamedAccounts();
-    const chainID = network.config.chainID
+    const chainID = network.config.chainId
     let ethUsdPriceFeedAddress;
     if (developmentChains.includes(network.name)){
         const ethUsdAggregator = await deployments.get("MockV3AggregatorContract");
@@ -17,7 +17,8 @@ module.exports = async ({getNamedAccounts, deployments}) => {
     const fundMe = await deploy("FundMe", {
         from: deployer,
         args: [ethUsdPriceFeedAddress],
-        log: true
+        log: true,
+        waitConfirmations: network.config.blockConfirmations || 5,
     })
     log("Done deploying FundMe")
     log("__________________________________________________")

@@ -46,7 +46,7 @@ contract FundMe {
             "sorry, you must pay a minimum of USD 10."
         );
         funders.push(msg.sender);
-        addressToAmountFunded[msg.sender] = (msg.value / 1e18);
+        addressToAmountFunded[msg.sender] = msg.value;
     }
 
     function getVersion() public view returns (uint256) {

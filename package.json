@@ -9,7 +9,10 @@
     "deploy-mock": "npx hardhat deploy --tags mock",
     "deploy-FundMe": "npx hardhat deploy --tags FundMe",
     "deploy-sepolia": "npx hardhat deploy --network sepolia",
-    "deploy-local": "npx hardhat deploy --network localhost"
+    "deploy-local": "npx hardhat deploy --network localhost",
+    "test": "npx hardhat test",
+    "test-coverage": "npx hardhat coverage",
+    "gas-report": "npx hardhat test && npx hardhat gas-reporter"
   },
   "keywords": [],
   "author": "",

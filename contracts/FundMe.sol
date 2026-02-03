@@ -56,7 +56,7 @@ contract FundMe {
         return priceFeed.version();
     }
 
-    function widthdraw() public onlyOwner {
+    function withdraw() public onlyOwner {
         for (
             uint256 funderIndex = 0;
             funderIndex < funders.length;

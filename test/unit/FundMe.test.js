@@ -49,4 +49,34 @@ describe("FundMe",  () => {
             assert.equal(version.toString(), "0")
         })
     })
-});
+    describe("withdraw", () => {
+        beforeEach(async () => {
+            await fundMe.fund({ value: ethers.parseEther("1") })
+        })
+        it("withdraw ETH from a single funder", async () => {
+            const startingFundMeBalance = BigInt(
+                (await ethers.provider.getBalance(fundMe.target)).toString()
+            )
+            const startingDeployerBalance = BigInt(
+                (await ethers.provider.getBalance(deployer)).toString()
+            )
+            const transactionResponse = await fundMe.withdraw()
+            const transactionReceipt = await transactionResponse.wait(1)
+            const { gasUsed, effectiveGasPrice, gasPrice } = transactionReceipt
+            const resolvedGasPrice = effectiveGasPrice ?? gasPrice ?? transactionResponse.gasPrice
+            const gasCost = BigInt(gasUsed.toString()) * BigInt(resolvedGasPrice.toString())
+            const endingFundMeBalance = BigInt(
+                (await ethers.provider.getBalance(fundMe.target)).toString()
+            )
+            const endingDeployerBalance = BigInt(
+                (await ethers.provider.getBalance(deployer)).toString()
+            )
+            assert.equal(endingFundMeBalance.toString(), "0")
+            const expectedDeployerBalance = startingFundMeBalance + startingDeployerBalance - gasCost
+            assert.equal(
+                expectedDeployerBalance.toString(),
+                endingDeployerBalance.toString()
+            )
+    })
+})
+})

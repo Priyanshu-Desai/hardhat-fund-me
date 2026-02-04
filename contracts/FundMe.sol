@@ -15,12 +15,12 @@ error FundMe__NotOwner();
 contract FundMe {
     using PriceConvertor for uint256;
 
-    uint256 constant MINIMUM_USD = 10 * 1e18;
-    address[] public funders;
-    mapping(address => uint256) public addressToAmountFunded;
+    uint256 constant s_MINIMUM_USD = 10 * 1e18;
+    address[] public s_funders;
+    mapping(address => uint256) public s_addressToAmountFunded;
     address private immutable i_owner;
 
-    AggregatorV3Interface public priceFeed;
+    AggregatorV3Interface public s_priceFeed;
 
     modifier onlyOwner() {
         if (msg.sender != i_owner) revert FundMe__NotOwner();
@@ -29,7 +29,7 @@ contract FundMe {
 
     constructor(address priceFeedAddress) {
         i_owner = msg.sender;
-        priceFeed = AggregatorV3Interface(priceFeedAddress);
+        s_priceFeed = AggregatorV3Interface(priceFeedAddress);
     }
 
     receive() external payable {
@@ -42,11 +42,11 @@ contract FundMe {
 
     function fund() public payable {
         require(
-            msg.value.getConversionRate(priceFeed) >= MINIMUM_USD,
+            msg.value.getConversionRate(s_priceFeed) >= s_MINIMUM_USD,
             "sorry, you must pay a minimum of USD 10."
         );
-        funders.push(msg.sender);
-        addressToAmountFunded[msg.sender] = msg.value;
+        s_funders.push(msg.sender);
+        s_addressToAmountFunded[msg.sender] = msg.value;
     }
 
     function getVersion() public view returns (uint256) {
@@ -59,13 +59,13 @@ contract FundMe {
     function withdraw() public onlyOwner {
         for (
             uint256 funderIndex = 0;
-            funderIndex < funders.length;
+            funderIndex < s_funders.length;
             funderIndex++
         ) {
-            address funder = funders[funderIndex];
-            addressToAmountFunded[funder] = 0;
+            address funder = s_funders[funderIndex];
+            s_addressToAmountFunded[funder] = 0;
         }
-        funders = new address[](0);
+        s_funders = new address[](0);
         payable(msg.sender).transfer(address(this).balance);
     }
 }

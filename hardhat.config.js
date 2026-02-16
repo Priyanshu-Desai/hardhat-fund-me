@@ -45,8 +45,13 @@ module.exports = {
     currency: "GBP",
     coinmarketcap: COINMARKETCAP_API_KEY,
     outputFile: "gas-report.txt",
+    token: "ETH",
+    offline: true,
   },
   etherscan: {
-    apiKey: ETHERSCAN_API_KEY,
+    apiKey: {
+      mainnet: ETHERSCAN_API_KEY,
+      sepolia: ETHERSCAN_API_KEY,
+    },
   },
 };

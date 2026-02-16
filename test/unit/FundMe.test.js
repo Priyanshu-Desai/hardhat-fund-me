@@ -1,7 +1,9 @@
 const { assert, expect } = require("chai");
 const { deployments, ethers, getNamedAccounts } = require("hardhat");
+const { developmentChains } = require("../../helper-hardhat-config");
 
-describe("FundMe",  () => {
+developmentChains.includes(network.name)
+    ? describe("FundMe", () => {
     let fundMe
     let deployer
     let mockV3AggregatorContract
@@ -126,4 +128,5 @@ describe("FundMe",  () => {
             )
         })
     })
-})
+    })
+    : describe.skip("FundMe", () => {});

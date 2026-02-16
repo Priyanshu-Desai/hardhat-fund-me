@@ -12,7 +12,9 @@
     "deploy-local": "npx hardhat deploy --network localhost",
     "test": "npx hardhat test",
     "test-coverage": "npx hardhat coverage",
-    "gas-report": "npx hardhat test && npx hardhat gas-reporter"
+    "gas-report": "npx hardhat test && npx hardhat gas-reporter",
+    "fund": "npx hardhat run scripts/fund.js --network localhost",
+    "withdraw": "npx hardhat run scripts/withdraw.js --network localhost"
   },
   "keywords": [],
   "author": "",
